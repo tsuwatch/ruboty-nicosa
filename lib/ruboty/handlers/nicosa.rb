@@ -1,4 +1,4 @@
-require "ruboty/nicosa/actions"
+require "ruboty/actions/nicosa/nicosa"
 
 module Ruboty
   module Handlers
@@ -6,11 +6,7 @@ module Ruboty
       on /nicosa (?<service>video|live|illust|manga|book|channel|channelarticle|news?) (?<mode>.+?) (?<query>.+)/, name: 'nicosa', description: 'Search from niconico'
 
       def nicosa(message)
-        message.reply(
-          Ruboty::Nicosa::Actions.new(
-            message[:service], message[:mode], message[:query]
-          ).call
-        )
+        Ruboty::Actions::Nicosa.new(message).call
       end
     end
   end

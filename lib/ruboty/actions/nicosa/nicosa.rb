@@ -1,16 +1,10 @@
 require 'nicosa'
 
 module Ruboty
-  module Nicosa
-    class Actions
-      def initialize(service, mode, query)
-        @service = service
-        @mode = mode
-        @query = query
-      end
-
+  module Actions
+    class Nicosa < ::Ruboty::Actions::Base
       def call
-        response.public_send(@mode)
+        message.reply(response.public_send(message[:mode]))
       rescue => e
         e
       end
@@ -18,12 +12,12 @@ module Ruboty
       private
 
       def response
-        client.search(@query, params).map { |n| n['url'] }
+        client.search(message[:query], params).map { |n| n['url'] }
       end
 
       def client
         @client ||= ::Nicosa::Client.new(
-          service: @service,
+          service: message[:service],
           user_agent: 'https://github.com/yassun/ruboty-niconico'
         )
       end
