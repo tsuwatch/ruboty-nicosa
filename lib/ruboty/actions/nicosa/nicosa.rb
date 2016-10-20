@@ -18,7 +18,7 @@ module Ruboty
       def client
         @client ||= ::Nicosa::Client.new(
           service: message[:service],
-          user_agent: 'https://github.com/yassun/ruboty-niconico'
+          user_agent: 'https://github.com/tsuwatch/ruboty-nicosa'
         )
       end
 
