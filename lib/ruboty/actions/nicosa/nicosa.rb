@@ -6,7 +6,7 @@ module Ruboty
       def call
         message.reply(response.public_send(message[:mode]))
       rescue => e
-        e
+        message.reply(e)
       end
 
       private
